@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit {{user.name}} User</title>
+    <title>Edit User</title>
 </head>
 <body>
-    <h2>Edit User</h2>
-     <form action="/users/new" method="POST">
+    <h2>Edit <span>{{user.first_name}}</span> User</h2>
+    
+     <form method="POST">
         <input type="text" name="first_name" placeholder="first name">
         <input type="text" name="last_name" placeholder="last name">
         <input type="text" name="image_url" placeholder="image url">  
-        <button>Update User Information</button>
+        <button type="submit">Update User Information</button>
      </form> 
      <a href="/">Return to User List</a>
 </body>

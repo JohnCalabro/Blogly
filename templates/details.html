@@ -27,7 +27,28 @@
             formaction="/{{ user.id }}/delete"
             formmethod="POST">Delete
     </button>
+        
+    <!-- <button formmethod="POST">
+        Add Post
+    </button> -->
   </form>
+
+  <a href="/post/{{user.id}}/new">Add Post</a>
+
+  <h1>Posts</h1>
+
+  <ul>
+    {% for post in user.posts %}
+    <li>
+      <a href="/{{ post.id}}/new_post">{{ post.title }}</a>
+      <!-- <small>{{ post.friendly_date }}</small> -->
+    </li>
+    {% endfor %}
+  </ul>
+
+
+
+  <!-- '/<int:post_id>/new_post' -->
   
 </body>
 </html>
