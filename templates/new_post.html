@@ -11,8 +11,33 @@
     <p>{{post.content}}</p>
 
     <a href="/post/{{ post.id }}/edit">Edit Post</a>
+    
+    
     <br>
     <a href="/">Back to Users</a>
+
+    <br>
+<!-- <form method="POST">
+    <button class="btn btn-danger btn-sm"
+   
+    formmethod="POST">Delete Post
+    formaction="/{{ post.id }}/delete">Delete>
+</button> -->
+
+<form>
+<!-- <button class="btn btn-danger btn-sm"
+            
+            formmethod="POST">Delete Post
+    </button> -->
+    <button class="btn btn-danger btn-sm"
+    formaction="/post/{{ post.id }}/delete"
+    formmethod="POST">Delete
+</button>
+</form>
+
+
 </body>
 </html>
 
+<!-- formmethod="POST"
+formaction="/{{ post.id }}/delete">Delete</button> -->

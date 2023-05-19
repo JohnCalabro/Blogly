@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Tags</h1>
+    <ul>
+        {% for t in tags %}
+            
+            <li><a href="/tags/{{t.id}}"> {{t.name}} {{t.posts.name}} </a></li>
+            {% endfor %}
+         </ul>
+</body>
+</html>
+
+
+
+
+

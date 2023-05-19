@@ -1,7 +1,9 @@
 """Blogly application."""
 
 from flask import Flask, request, render_template, redirect, flash, session
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, PostTag, Tag
+
+# from models import db, connect_db, User, Post
 
 app = Flask(__name__)
 
@@ -83,6 +85,7 @@ def remove_user(user_id):
 @app.route('/post/<int:user_id>/new')
 def new_post_form(user_id):
     """shows form to add a post"""
+
     user = User.query.get_or_404(user_id)
     return render_template('post_form.html', user=user)
 
@@ -112,6 +115,7 @@ def show_post(post_id):
     # user = User.query.get_or_404(user_id)
     # print(user)
     post = Post.query.get_or_404(post_id)
+    
     return render_template('new_post.html', post=post)
 
 @app.route('/all_posts')
@@ -143,6 +147,66 @@ def update_post(post_id):
 
     return redirect(f"/{post_id}/new_post")
 
-
-
+@app.route('/post/<int:post_id>/delete', methods=['POST'])
+def delete_post(post_id):
+    """Remove a post from post display page"""
     
+    post = Post.query.get_or_404(post_id)
+    print(post)
+    
+    db.session.delete(post)
+    db.session.commit()
+    
+    return redirect("/")    
+
+  
+@app.route('/tags_list')
+def show_tags():
+    tags = Tag.query.all()
+    return render_template('tags.html', tags=tags)
+
+@app.route('/tags')
+def get_tags_form():
+    """Show form to create new tags"""
+    tag = Tag.query.all()
+    return render_template('tag_form.html', tag=tag)
+
+@app.route('/new_tag', methods=['POST'])
+def create_tag():
+    name = request.form["name"]
+
+    new_tag = Tag(name=name)
+
+    db.session.add(new_tag)
+    db.session.commit()
+
+    return redirect('/')
+
+
+
+
+    return redirect(f"/{new_user.id}")
+
+@app.route('/tags/<int:tag_id>')
+def show_tag_details(tag_id):
+    tag = Tag.query.get_or_404(tag_id)
+    return render_template('tag_detail.html', tag=tag)
+
+
+
+
+# @app.route('/tags/<int:tag_id>')
+# def tags_show(tag_id):
+#     """Show a page with info on a specific tag"""
+
+#     tag = Tag.query.get_or_404(tag_id)
+#     return render_template('tags/show.html', tag=tag)
+
+
+
+
+# many-many seems to be set up right, but it still confuses me. App is mostly functional, got tags to render, and 
+# on a list of links and can view tag details when clicked, still can't wrap my head around how the 3 tables are linked, have vague idea. 
+#Haven't found the vids on many-to-many all that clear, not seeing how
+# the relationsips work in app setting, assignment caused more confusion then helped with many-to-many. All else was a great
+# learning experience, parts I and II were awesome. Don't want to fall behind so moving on for now. 
